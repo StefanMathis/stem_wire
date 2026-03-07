@@ -60,8 +60,7 @@ assert_abs_diff_eq!(
 # Deserialization
 
 All length fields accept SI units during deserialization (e.g. `8 mm`, `0.5 m`).
-See [crate-level](crate) and [dyn_quantity](dyn_quantity) documentation for
-details.
+See [crate-level](crate) and [dyn_quantity] documentation for details.
  */
 #[derive(Debug, Clone, Default)]
 #[cfg_attr(feature = "serde", derive(Serialize))]
@@ -79,13 +78,13 @@ pub struct RectangularWire {
 
 impl RectangularWire {
     /**
-    Returns a new instance of [`RoundWire`] if the given field values fulfill
-    the following conditions:
+    Returns a new instance of [`RectangularWire`] if the given field values
+    fulfill the following conditions:
     - `height` must be positive.
     - `width` must be positive.
     - `insulation_thickness` must be positive or zero.
 
-    See the struct docstring [`RoundWire`] for more.
+    See the struct docstring [`RectangularWire`] for more.
 
     # Examples
 

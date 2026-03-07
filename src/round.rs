@@ -61,8 +61,7 @@ assert_abs_diff_eq!(
 # Deserialization
 
 All length fields accept SI units during deserialization (e.g. `8 mm`, `0.5 m`).
-See [crate-level](crate) and [dyn_quantity](dyn_quantity) documentation for
-details.
+See [crate-level](crate) and [dyn_quantity] documentation for details.
  */
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize))]

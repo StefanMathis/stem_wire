@@ -31,14 +31,14 @@ pub enum Error {
     InvalidUsize(ComparisonError<usize>),
     /**
     This error is returned when building a
-    [`StrandedWire`](crate::wire_stranded::StrandedWire) out of wires with
-    inequal materials; [`StrandedWire`](crate::wire_stranded::StrandedWire)
+    [`StrandedWire`](crate::stranded::StrandedWire) out of wires with
+    inequal materials; [`StrandedWire`](crate::stranded::StrandedWire)
     requires that all of its component wires use the same material.
      */
     InequalMaterials,
     /**
     The strand list / vector provided to
-    [`StrandedWire::new`](crate::wire_stranded::StrandedWire::new) was
+    [`StrandedWire::new`](crate::stranded::StrandedWire::new) was
     empty.
      */
     EmptyStrandList,

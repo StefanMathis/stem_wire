@@ -23,15 +23,16 @@ found in the cage of asynchronous motors. A winding in stem always consists of
 a single wire (implementor of this trait) which provides the calculation
 routines for properties such as the resistance, slot filling factor or cross
 section. A conductor consisting of multiple individual physical wires can be
-represented by abstractions such as [`StrandedWire`](crate::StrandedWire)).
+represented by abstractions such as
+[`StrandedWire`](crate::stranded::StrandedWire)).
 
 Depending on the wire type, the geometric dimensions of the wire might
 either be a property of the wire itself (see e.g.
-[`RoundWire`](crate::RoundWire)) or depend on the geometry of the magnetic core
-which holds the corresponding winding. For this reason, the methods of this
-trait often require additional information. For example,
-[`Wire::conductor_area`] needs both the area covered by the winding zone and
-the number of turns within the zone.
+[`RoundWire`](crate::round::RoundWire)) or depend on the geometry of the
+magnetic core  which holds the corresponding winding. For this reason, the
+methods of this trait often require additional information. For example,
+[`Wire::effective_conductor_area`] needs both the area covered by the winding
+zone and the number of turns within the zone.
 
 Unless explicitly mentioned otherwise, the following assumptions are made for
 all wires:
@@ -40,16 +41,16 @@ all wires:
 - Idealized geometric shapes
 
 This crate provides multiple predefined wire types which implement this trait:
-- [`CastWire`](crate::CastWire): A "bar" wire used in cage windings.
-- [`RectangularWire`](crate::RectangularWire): A rectangular bar e.g. for hair
-pin windings.
-- [`RoundWire`](crate::RoundWire): A round wire as used in the vast majority of
-electrical machines.
-- [`SffWire`](crate::SffWire): An abstract wire described by its slot filling
-factor where the exact geometry of the conductor is not defined.
-- [`StrandedWire`](crate::StrandedWire): A WireGroupd wire formed from multiple
-individual conductors (e.g. [`RoundWire`](crate::RoundWire)) which are connected
-in parallel.
+- [`CastWire`](crate::cast::CastWire): A cast wire used in cage windings.
+- [`RectangularWire`](crate::rectangular::RectangularWire): A rectangular bar
+e.g. for hair pin windings.
+- [`RoundWire`](crate::round::RoundWire): A round wire as used in the vast
+majority of electrical machines.
+- [`SffWire`](crate::sff::SffWire): An abstract wire described by its slot
+fill factor where the exact geometry of the conductor is not defined.
+- [`StrandedWire`](crate::stranded::StrandedWire): A WireGroupd wire formed from
+multiple individual conductors (e.g. [`RoundWire`](crate::round::RoundWire))
+which are connected in parallel.
 
 By implementing this trait for a custom type, user-defined wires can be used in
 stem in the same way as those predefined types.
@@ -66,11 +67,12 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
 
     Depending on the wire type, it might be necessary to provide the area
     convered by the winding (`zone_area`) and the number of `turns` in that zone.
-    An example is the [`SffWire`](crate::SffWire) type:
-    It is an abstract wire defined by just the slot filling factor; its cross
-    section is hence calculated as `slot_filling_factor * zone_area / turns`.
-    On the other hand, the cross section of a [`RoundWire`](crate::RoundWire)
-    is just `pi * radius²` and both `zone_area` and `turns` are not used at all.
+    An example is the [`SffWire`](crate::sff::SffWire) type:
+    It is an abstract wire defined by just the slot fill factor; its cross
+    section is hence calculated as `slot_fill_factor * zone_area / turns`.
+    On the other hand, the cross section of a
+    [`RoundWire`](crate::round::RoundWire) is just `pi * radius²` and both
+    `zone_area` and `turns` are not used at all.
 
     # Examples
 
@@ -183,12 +185,12 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     where:
 
     - `L` is the conductor `length`,
-    - `A` is the cross-sectional area from [`Wire::conductor_area`],
+    - `A` is the cross-sectional area from [`Wire::effective_conductor_area`],
     - `ρ` is the electrical resistivity from [`Material::electrical_resistivity`].
 
-    `zone_area` and `turns` are forwarded to [`Wire::conductor_area`], while
-    the conditions are used as the input to the [`VarQuantity::get`] method of
-    the [`Material::electrical_resistivity`] field.
+    `zone_area` and `turns` are forwarded to [`Wire::effective_conductor_area`],
+    while the conditions are used as the input to the [`VarQuantity::get`]
+    method of the [`Material::electrical_resistivity`] field.
 
     # Examples
 
@@ -260,7 +262,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     area available for a single turn (`zone_area / turns`). Usually, there is no
     need to overwrite this method (except if the slot filling factor is already
     known and the cross section is calculated from it, as is the case for
-    [`SffWire`](crate::SffWire)).
+    [`SffWire`](crate::sff::SffWire)).
 
     # Examples
 
@@ -305,7 +307,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     area available for a single turn (`zone_area / turns`). Usually, there is no
     need to overwrite this method (except if the slot filling factor is already
     known and the cross section is calculated from it, as is the case for
-    [`SffWire`](crate::SffWire)).
+    [`SffWire`](crate::sff::SffWire)).
 
     # Examples
 

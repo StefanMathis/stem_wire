@@ -14,7 +14,7 @@ pub mod stranded;
 pub mod prelude {
     /*!
     This module reexports all wire types defined in stem_wire, the
-    [`Wire`](crate::wire::Wire) trait as well as the [`stem_material::prelude`]
+    [`Wire`] trait as well as the [`stem_material::prelude`]
     module to simplify the usage of this crate.
      */
 

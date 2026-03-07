@@ -15,7 +15,7 @@ The parameter `fraction`, where present, represents the geometric fraction
 of the full body (e.g. `1.0` = full geometry, `0.5` = half).
 
 These utilities are primarily intended for use in
-[`Wire::resistance`](crate::Wire::resistance).
+[`Wire::resistance`](crate::wire::Wire::resistance).
 */
 
 use std::f64::consts::PI;

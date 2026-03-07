@@ -97,13 +97,13 @@ pub struct SffWire {
 
 impl SffWire {
     /**
-    Returns a new instance of [`RoundWire`] if the given field values fulfill
+    Returns a new instance of [`SffWire`] if the given field values fulfill
     the following conditions:
     - `outer_diameter` must be positive.
     - `inner_diameter` must be positive or zero.
     - `insulation_thickness` must be positive or zero.
 
-    See the struct docstring [`RoundWire`] for more.
+    See the struct docstring [`SffWire`] for more.
 
     # Examples
 
