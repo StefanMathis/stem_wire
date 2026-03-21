@@ -25,12 +25,15 @@ copper, possibly with an insulation layer.
 
 This is the "classic" round wire used in the vast majority of electrical
 machines. It is defined by the following fields:
-- `outer_diameter`: Outer diameter of the conductor. Must be positive.
+- `outer_diameter`: Outer diameter of the conductor. Must be positive
+(`outer_diameter > 0 m`).
 - `inner_diameter`: Inner diameter of the conductor. Must be positive or zero,
-but smaller than `outer_diameter` (positive means the conductor is hollow, e.g.
-to form a channel for cooling fluids).
+but smaller than `outer_diameter` (`outer_diameter > inner_diameter >= 0 m`).
+A positive value means the conductor is hollow, e.g. to form a channel for
+cooling fluids.
 - `insulation_thickness`: Thickness of the insulation layer wrapped around the
-outer diameter. Must be positive or zero (zero means no insulation layer).
+outer diameter. Must be positive or zero (`insulation_thickness >= 0 m`), with
+zero equals no insulation layer.
 - `conductor_material`: The material of the conductor.
 
 The effective conductor area is the space between the inner and the outer
@@ -81,9 +84,10 @@ impl RoundWire {
     /**
     Returns a new instance of [`RoundWire`] if the given field values fulfill
     the following conditions:
-    - `outer_diameter` must be positive.
-    - `inner_diameter` must be positive or zero.
-    - `insulation_thickness` must be positive or zero.
+    - `outer_diameter` must be positive (`outer_diameter > 0 m`).
+    - `inner_diameter` must be positive or zero (`inner_diameter >= 0 m`).
+    - `insulation_thickness` must be positive or zero
+    (`insulation_thickness >= 0 m`).
 
     See the struct docstring [`RoundWire`] for more.
 

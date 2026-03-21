@@ -1,13 +1,13 @@
 stem_wire
 =========
 
-[`Wire`]: https://docs.rs/stem_wire/0.1.1/stem_wire/wire/trait.Wire.html
-[`RoundWire`]: https://docs.rs/stem_wire/0.1.1/stem_wire/round/struct.RoundWire.html
-[`RectangularWire`]: https://docs.rs/stem_wire/0.1.1/stem_wire/rectangular/struct.RectangularWire.html
-[`StrandedWire`]: https://docs.rs/stem_wire/0.1.1/stem_wire/stranded/struct.StrandedWire.html
-[`SffWire`]: https://docs.rs/stem_wire/0.1.1/stem_wire/sff/struct.SffWire.html
-[`CastWire`]: https://docs.rs/stem_wire/0.1.1/stem_wire/cast/struct.CastWire.html
-[`resistance`]: https://docs.rs/stem_wire/0.1.1/stem_wire/resistance/
+[`Wire`]: https://docs.rs/stem_wire/0.1.2/stem_wire/wire/trait.Wire.html
+[`RoundWire`]: https://docs.rs/stem_wire/0.1.2/stem_wire/round/struct.RoundWire.html
+[`RectangularWire`]: https://docs.rs/stem_wire/0.1.2/stem_wire/rectangular/struct.RectangularWire.html
+[`StrandedWire`]: https://docs.rs/stem_wire/0.1.2/stem_wire/stranded/struct.StrandedWire.html
+[`SffWire`]: https://docs.rs/stem_wire/0.1.2/stem_wire/sff/struct.SffWire.html
+[`CastWire`]: https://docs.rs/stem_wire/0.1.2/stem_wire/cast/struct.CastWire.html
+[`resistance`]: https://docs.rs/stem_wire/0.1.2/stem_wire/resistance/
 
 > **Feedback welcome!**  
 > Found a bug, missing docs, or have a feature request?  
@@ -45,4 +45,4 @@ for details.
 # Documentation
 
 The full API documentation is available at
-[https://docs.rs/stem_wire/0.1.1/stem_wire/](https://docs.rs/stem_wire/0.1.1/stem_wire/).
+[https://docs.rs/stem_wire/0.1.2/stem_wire/](https://docs.rs/stem_wire/0.1.2/stem_wire/).

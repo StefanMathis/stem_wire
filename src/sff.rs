@@ -21,10 +21,12 @@ An "abstract" wire defined by its material and its slot fill factor(s).
 This is a very simple wire type which is fully specified by the following three
 properties:
 - `slot_fill_factor_conductor`: Portion of the winding zone / slot filled with
-conducting material. Must be between 0 and 1 (0% to 100%).
+conducting material. Must be between 0 and 1
+(`0 <= slot_fill_factor_conductor <= 1`).
 - `slot_fill_factor_overall`: Portion of the winding zone / slot filled with
-wire material (conductor + insulation). Must be between 0 and 1 (0% to 100%) and
-must be larger than or equal to `slot_fill_factor_conductor`.
+wire material (conductor + insulation). Must be between 0 and 1 and must be
+larger than or equal to `slot_fill_factor_conductor`
+(`slot_fill_factor_conductor <= slot_fill_factor_overall <= 1`).
 - `conductor_material`: The material of the conductor.
 
 This wire type can be useful when modeling a winding where only its slot fill
@@ -99,9 +101,11 @@ impl SffWire {
     /**
     Returns a new instance of [`SffWire`] if the given field values fulfill
     the following conditions:
-    - `outer_diameter` must be positive.
-    - `inner_diameter` must be positive or zero.
-    - `insulation_thickness` must be positive or zero.
+    - `slot_fill_factor_conductor` must be between 0 and 1
+    (`0 <= slot_fill_factor_overall <= 1`).
+    - `slot_fill_factor_overall` must be between 0 and 1 and equal to or larger
+    than `slot_fill_factor_conductor`
+    (`slot_fill_factor_conductor <= slot_fill_factor_overall <= 1`).
 
     See the struct docstring [`SffWire`] for more.
 

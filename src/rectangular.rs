@@ -26,10 +26,11 @@ copper, possibly with an insulation layer.
 This type of wire is often found in "constructed" windings such as hairpin
 windings with a low number of turns per coil. It is defined by the following
 fields:
-- `height`: Height of the bar. Must be positive.
-- `width`: Width of the bar. Must be positive.
+- `height`: Height of the bar. Must be positive (`height > 0 m`).
+- `width`: Width of the bar. Must be positive (`width > 0 m`).
 - `insulation_thickness`: Thickness of the insulation layer wrapped around the
-outer diameter. Must be positive or zero (zero means no insulation layer).
+outer diameter. Must be positive or zero (`insulation_thickness >= 0 m`), with
+zero equals no insulation layer.
 - `conductor_material`: The material of the conductor.
 
 The effective conductor area is the space between the inner and the outer
@@ -80,9 +81,10 @@ impl RectangularWire {
     /**
     Returns a new instance of [`RectangularWire`] if the given field values
     fulfill the following conditions:
-    - `height` must be positive.
-    - `width` must be positive.
-    - `insulation_thickness` must be positive or zero.
+    - `height` must be positive (`height > 0 m`).
+    - `width` must be positive (`width > 0 m`).
+    - `insulation_thickness` must be positive or zero
+    (`insulation_thickness >= 0 m`).
 
     See the struct docstring [`RectangularWire`] for more.
 
