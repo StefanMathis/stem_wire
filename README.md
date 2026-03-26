@@ -9,6 +9,12 @@ stem_wire
 [`CastWire`]: https://docs.rs/stem_wire/0.1.2/stem_wire/cast/struct.CastWire.html
 [`resistance`]: https://docs.rs/stem_wire/0.1.2/stem_wire/resistance/
 
+[![Documentation](https://docs.rs/stem_wire/badge.svg)](https://docs.rs/stem_wire)
+
+Wire definition for stem - a Simulation Toolbox for Electric Motors.
+
+The full API documentation is available at https://docs.rs/stem_wire/0.1.2/stem_wire.
+
 > **Feedback welcome!**  
 > Found a bug, missing docs, or have a feature request?  
 > Please open an issue on GitHub.
