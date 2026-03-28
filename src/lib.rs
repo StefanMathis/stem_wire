@@ -1,4 +1,16 @@
-#![doc = include_str!("../README.md")]
+/*!
+[`Wire`]: crate::wire::Wire
+[`RoundWire`]: crate::round::RoundWire
+[`RectangularWire`]: crate::rectangular::RectangularWire
+[`StrandedWire`]: crate::stranded::StrandedWire
+[`SffWire`]: crate::sff::SffWire
+[`CastWire`]: crate::cast::CastWire
+[`resistance`]: crate::resistance
+
+Composable serialization and deserialization for Rust structs.
+
+ */
+#![doc = include_str!("../docs/main.md")]
 #![deny(missing_docs)]
 
 pub mod error;

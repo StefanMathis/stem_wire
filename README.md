@@ -1,6 +1,10 @@
 stem_wire
 =========
 
+<!-- This file has ben generated with build.rs by concatenating docs/links.md,
+docs/main.md and (if available docs/end.md). Do not modify this file, instead
+modify the components. -->
+
 [`Wire`]: https://docs.rs/stem_wire/0.1.2/stem_wire/wire/trait.Wire.html
 [`RoundWire`]: https://docs.rs/stem_wire/0.1.2/stem_wire/round/struct.RoundWire.html
 [`RectangularWire`]: https://docs.rs/stem_wire/0.1.2/stem_wire/rectangular/struct.RectangularWire.html
@@ -13,11 +17,11 @@ stem_wire
 
 Wire definition for stem - a Simulation Toolbox for Electric Motors.
 
-The full API documentation is available at https://docs.rs/stem_wire/0.1.2/stem_wire.
+The full API documentation is available at <https://docs.rs/stem_wire/0.1.2/stem_wire>.
 
 > **Feedback welcome!**  
 > Found a bug, missing docs, or have a feature request?  
-> Please open an issue on GitHub.
+> Please open an issue on [GitHub](https://github.com/StefanMathis/stem_wire.git).
 
 This crate contains the [`Wire`] trait which serves as the basic building block
 for defining wires within the stem (Simulation Toolbox for Electric Motors)
@@ -47,8 +51,3 @@ the [serialize_with_units](https://docs.rs/dyn_quantity/latest/dyn_quantity/quan
 
 See the chapter [serialization and deserialization](https://stefanmathis.github.io/stem_book/serialization_and_deserialization.html) of the [stem book](https://stefanmathis.github.io/stem_book/)
 for details.
-
-# Documentation
-
-The full API documentation is available at
-[https://docs.rs/stem_wire/0.1.2/stem_wire/](https://docs.rs/stem_wire/0.1.2/stem_wire/).
