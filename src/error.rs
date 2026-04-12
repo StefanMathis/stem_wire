@@ -8,9 +8,8 @@ wire types.
 use compare_variables::ComparisonError;
 use stem_material::uom::si::f64::Length;
 
-/**
-An enum representing errors returned by wire constructors.
-*/
+/// An enum representing errors returned by [`Ẁire`](crate::wire::Wire)
+/// constructors.
 #[derive(Debug)]
 pub enum Error {
     /**
