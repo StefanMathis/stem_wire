@@ -5,7 +5,7 @@ building one of the predefined wires can fail due to invalid input data. The
 wire types.
 */
 
-use compare_variables::ComparisonError;
+use compare_variables::Comparison;
 use stem_material::uom::si::f64::Length;
 
 /// An enum representing errors returned by [`Ẁire`](crate::wire::Wire)
@@ -14,20 +14,20 @@ use stem_material::uom::si::f64::Length;
 pub enum Error {
     /**
     A given physical [`Length`] is not within its allowed value range (as
-    specified inside the [`ComparisonError`], usually a length needs to be
+    specified inside the [`Comparison`], usually a length needs to be
     positive).
      */
-    InvalidLength(ComparisonError<Length>),
+    InvalidLength(Comparison<Length>),
     /**
     A given [`f64`] value is not within its allowed value range (as specified
-    inside the [`ComparisonError`]).
+    inside the [`Comparison`]).
      */
-    InvalidF64(ComparisonError<f64>),
+    InvalidF64(Comparison<f64>),
     /**
     A given [`usize`] value is not within its allowed value range (as
-    specified inside the [`ComparisonError`]).
+    specified inside the [`Comparison`]).
      */
-    InvalidUsize(ComparisonError<usize>),
+    InvalidUsize(Comparison<usize>),
     /**
     This error is returned when building a
     [`StrandedWire`](crate::stranded::StrandedWire) out of wires with
@@ -63,20 +63,20 @@ impl std::fmt::Display for Error {
 
 impl std::error::Error for Error {}
 
-impl From<ComparisonError<Length>> for Error {
-    fn from(value: ComparisonError<Length>) -> Self {
+impl From<Comparison<Length>> for Error {
+    fn from(value: Comparison<Length>) -> Self {
         return Error::InvalidLength(value);
     }
 }
 
-impl From<ComparisonError<f64>> for Error {
-    fn from(value: ComparisonError<f64>) -> Self {
+impl From<Comparison<f64>> for Error {
+    fn from(value: Comparison<f64>) -> Self {
         return Error::InvalidF64(value);
     }
 }
 
-impl From<ComparisonError<usize>> for Error {
-    fn from(value: ComparisonError<usize>) -> Self {
+impl From<Comparison<usize>> for Error {
+    fn from(value: Comparison<usize>) -> Self {
         return Error::InvalidUsize(value);
     }
 }
