@@ -80,7 +80,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     use std::sync::Arc;
     use std::f64::consts::PI;
 
-    use approx::assert_abs_diff_eq;
+    use approxim::assert_abs_diff_eq;
 
     use stem_wire::prelude::*;
 
@@ -125,7 +125,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     use std::sync::Arc;
     use std::f64::consts::PI;
 
-    use approx::assert_abs_diff_eq;
+    use approxim::assert_abs_diff_eq;
 
     use stem_wire::prelude::*;
 
@@ -198,7 +198,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     use std::sync::Arc;
     use std::f64::consts::PI;
 
-    use approx::assert_abs_diff_eq;
+    use approxim::assert_abs_diff_eq;
 
     use stem_wire::prelude::{*, unary::Linear};
 
@@ -270,7 +270,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     use std::sync::Arc;
     use std::f64::consts::PI;
 
-    use approx::assert_abs_diff_eq;
+    use approxim::assert_abs_diff_eq;
 
     use stem_wire::prelude::*;
 
@@ -315,7 +315,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     use std::sync::Arc;
     use std::f64::consts::PI;
 
-    use approx::assert_abs_diff_eq;
+    use approxim::assert_abs_diff_eq;
 
     use stem_wire::prelude::*;
 

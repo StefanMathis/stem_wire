@@ -55,7 +55,7 @@ fn test_load_wire_round() {
         "};
 
     let wire = create_dbm().from_str::<RoundWire, SerdeYaml>(yaml).unwrap();
-    approx::assert_abs_diff_eq!(
+    approxim::assert_abs_diff_eq!(
         wire.resistance(
             Length::new::<millimeter>(100.0),
             Area::new::<square_meter>(0.0),
@@ -108,7 +108,7 @@ fn test_load_wire_stranded() {
     let wire = create_dbm()
         .from_str::<StrandedWire, SerdeYaml>(yaml)
         .unwrap();
-    approx::assert_abs_diff_eq!(
+    approxim::assert_abs_diff_eq!(
         wire.resistance(
             Length::new::<meter>(0.1),
             Area::new::<square_millimeter>(0.0),
@@ -138,7 +138,7 @@ fn test_load_wire_stranded() {
     let wire = create_dbm()
         .from_str::<StrandedWire, SerdeYaml>(yaml)
         .unwrap();
-    approx::assert_abs_diff_eq!(
+    approxim::assert_abs_diff_eq!(
         wire.resistance(
             Length::new::<meter>(0.1),
             Area::new::<square_millimeter>(0.0),

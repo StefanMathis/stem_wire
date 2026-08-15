@@ -41,7 +41,7 @@ Division by zero (e.g. zero area or conductivity) results in infinite resistance
 # Examples
 
 ```
-use approx::assert_abs_diff_eq;
+use approxim::assert_abs_diff_eq;
 
 use stem_wire::prelude::*;
 use stem_wire::resistance::conductor_area;
@@ -78,7 +78,7 @@ Division by zero results in infinite resistance.
 # Examples
 
 ```
-use approx::assert_abs_diff_eq;
+use approxim::assert_abs_diff_eq;
 
 use stem_wire::prelude::*;
 use stem_wire::resistance::quader;
@@ -128,7 +128,7 @@ Division by zero results in infinite resistance.
 # Examples
 
 ```
-use approx::assert_abs_diff_eq;
+use approxim::assert_abs_diff_eq;
 
 use stem_wire::prelude::*;
 use stem_wire::resistance::cylinder_axial;
@@ -141,7 +141,7 @@ let result = cylinder_axial(
     Length::new::<meter>(0.0),
     1.0
 );
-approx::assert_abs_diff_eq!(result.get::<ohm>(), 0.318309, epsilon = 1e-6);
+approxim::assert_abs_diff_eq!(result.get::<ohm>(), 0.318309, epsilon = 1e-6);
 
 // Half cylinder
 let result = cylinder_axial(
@@ -151,7 +151,7 @@ let result = cylinder_axial(
     Length::new::<meter>(0.0),
     0.5
 );
-approx::assert_abs_diff_eq!(result.get::<ohm>(), 0.636619, epsilon = 1e-6);
+approxim::assert_abs_diff_eq!(result.get::<ohm>(), 0.636619, epsilon = 1e-6);
 ```
 */
 pub fn cylinder_axial(
@@ -182,7 +182,7 @@ Division by zero results in infinite resistance.
 # Examples
 
 ```
-use approx::assert_abs_diff_eq;
+use approxim::assert_abs_diff_eq;
 
 use stem_wire::prelude::*;
 use stem_wire::resistance::cylinder_radial;
@@ -195,7 +195,7 @@ let result = cylinder_radial(
     Length::new::<meter>(1.0),
     1.0
 );
-approx::assert_abs_diff_eq!(result.get::<ohm>(), 0.0011031, epsilon = 1e-6);
+approxim::assert_abs_diff_eq!(result.get::<ohm>(), 0.0011031, epsilon = 1e-6);
 
 // Half cylinder
 let result = cylinder_radial(
@@ -205,7 +205,7 @@ let result = cylinder_radial(
     Length::new::<meter>(1.0),
     0.5
 );
-approx::assert_abs_diff_eq!(result.get::<ohm>(), 0.0022064, epsilon = 1e-6);
+approxim::assert_abs_diff_eq!(result.get::<ohm>(), 0.0022064, epsilon = 1e-6);
 ```
 */
 pub fn cylinder_radial(
@@ -232,7 +232,7 @@ Division by zero results in infinite resistance.
 # Examples
 
 ```
-use approx::assert_abs_diff_eq;
+use approxim::assert_abs_diff_eq;
 
 use stem_wire::prelude::*;
 use stem_wire::resistance::cylinder_tangential;
@@ -245,7 +245,7 @@ let result = cylinder_tangential(
     Length::new::<meter>(1.0),
     1.0
 );
-approx::assert_abs_diff_eq!(result.get::<ohm>(), 0.0906472, epsilon = 1e-6);
+approxim::assert_abs_diff_eq!(result.get::<ohm>(), 0.0906472, epsilon = 1e-6);
 
 // Half cylinder
 let result = cylinder_tangential(
@@ -255,7 +255,7 @@ let result = cylinder_tangential(
     Length::new::<meter>(1.0),
     0.5
 );
-approx::assert_abs_diff_eq!(result.get::<ohm>(), 0.0906472/2.0, epsilon = 1e-6);
+approxim::assert_abs_diff_eq!(result.get::<ohm>(), 0.0906472/2.0, epsilon = 1e-6);
 ```
 */
 pub fn cylinder_tangential(
@@ -280,7 +280,7 @@ Requires `r_outer > r_inner`.
 Division by zero results in infinite resistance.
 
 ```
-use approx::assert_abs_diff_eq;
+use approxim::assert_abs_diff_eq;
 
 use stem_wire::prelude::*;
 use stem_wire::resistance::sphere_radial;
@@ -292,7 +292,7 @@ let result = sphere_radial(
     Length::new::<meter>(1.0),
     1.0
 );
-approx::assert_abs_diff_eq!(result.get::<ohm>(), 0.0079577, epsilon = 1e-6);
+approxim::assert_abs_diff_eq!(result.get::<ohm>(), 0.0079577, epsilon = 1e-6);
 
 // Half sphere
 let result = sphere_radial(
@@ -301,7 +301,7 @@ let result = sphere_radial(
     Length::new::<meter>(1.0),
     0.5
 );
-approx::assert_abs_diff_eq!(result.get::<ohm>(), 2.0*0.0079577, epsilon = 1e-6);
+approxim::assert_abs_diff_eq!(result.get::<ohm>(), 2.0*0.0079577, epsilon = 1e-6);
 ```
 */
 pub fn sphere_radial(

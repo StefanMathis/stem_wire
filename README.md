@@ -5,19 +5,19 @@ stem_wire
 docs/main.md and (if available docs/end.md). Do not modify this file, instead
 modify the components. -->
 
-[`Wire`]: https://docs.rs/stem_wire/0.1.4/stem_wire/wire/trait.Wire.html
-[`RoundWire`]: https://docs.rs/stem_wire/0.1.4/stem_wire/round/struct.RoundWire.html
-[`RectangularWire`]: https://docs.rs/stem_wire/0.1.4/stem_wire/rectangular/struct.RectangularWire.html
-[`StrandedWire`]: https://docs.rs/stem_wire/0.1.4/stem_wire/stranded/struct.StrandedWire.html
-[`SffWire`]: https://docs.rs/stem_wire/0.1.4/stem_wire/sff/struct.SffWire.html
-[`CastWire`]: https://docs.rs/stem_wire/0.1.4/stem_wire/cast/struct.CastWire.html
-[`resistance`]: https://docs.rs/stem_wire/0.1.4/stem_wire/resistance/
+[`Wire`]: https://docs.rs/stem_wire/0.2.0/stem_wire/wire/trait.Wire.html
+[`RoundWire`]: https://docs.rs/stem_wire/0.2.0/stem_wire/round/struct.RoundWire.html
+[`RectangularWire`]: https://docs.rs/stem_wire/0.2.0/stem_wire/rectangular/struct.RectangularWire.html
+[`StrandedWire`]: https://docs.rs/stem_wire/0.2.0/stem_wire/stranded/struct.StrandedWire.html
+[`SffWire`]: https://docs.rs/stem_wire/0.2.0/stem_wire/sff/struct.SffWire.html
+[`CastWire`]: https://docs.rs/stem_wire/0.2.0/stem_wire/cast/struct.CastWire.html
+[`resistance`]: https://docs.rs/stem_wire/0.2.0/stem_wire/resistance/
 
 [![Documentation](https://docs.rs/stem_wire/badge.svg)](https://docs.rs/stem_wire)
 
 Wire definition for stem - a Simulation Toolbox for Electric Motors.
 
-The full API documentation is available at <https://docs.rs/stem_wire/0.1.4/stem_wire>.
+The full API documentation is available at <https://docs.rs/stem_wire/0.2.0/stem_wire>.
 
 > **Feedback welcome!**  
 > Found a bug, missing docs, or have a feature request?  

@@ -1,6 +1,6 @@
 use std::sync::Arc;
 
-use approx::{self, assert_abs_diff_eq};
+use approxim::{self, assert_abs_diff_eq};
 use stem_wire::prelude::{unary::Linear, *};
 
 #[test]
@@ -38,12 +38,12 @@ fn test_invalid_wire_dimensions() {
 fn test_cross_section_area() {
     {
         let wire = RoundWire::default();
-        approx::assert_abs_diff_eq!(
+        approxim::assert_abs_diff_eq!(
             wire.conductor_area().get::<square_meter>(),
             0.785398,
             epsilon = 1e-6
         );
-        approx::assert_abs_diff_eq!(
+        approxim::assert_abs_diff_eq!(
             wire.overall_area().get::<square_meter>(),
             0.785398,
             epsilon = 1e-6
@@ -57,12 +57,12 @@ fn test_cross_section_area() {
             Length::new::<millimeter>(100.0),
         )
         .unwrap();
-        approx::assert_abs_diff_eq!(
+        approxim::assert_abs_diff_eq!(
             wire.conductor_area().get::<square_meter>(),
             0.785398,
             epsilon = 1e-6
         );
-        approx::assert_abs_diff_eq!(
+        approxim::assert_abs_diff_eq!(
             wire.overall_area().get::<square_meter>(),
             1.130973,
             epsilon = 1e-6
