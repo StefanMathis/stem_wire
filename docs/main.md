@@ -2,12 +2,12 @@
 > Found a bug, missing docs, or have a feature request?  
 > Please open an issue on [GitHub](https://github.com/StefanMathis/stem_wire.git).
 
-This crate contains the [`Wire`] trait which serves as the basic building block
-for defining wires within the stem (Simulation Toolbox for Electric Motors)
-ecosystem, see the [stem book](https://stefanmathis.github.io/stem_book/) for an
-introduction to the framework.
+This crate is part of the stem (Simulation Toolbox for Electric Motors)
+framework. See the [stem book](https://stefanmathis.github.io/stem_book/) for an
+introduction.
 
- Additionally, the following predefined wire types are provided:
+This crate contains the [`Wire`] trait which serves as the basic building block
+for defining wires. Additionally, the following predefined wire types are provided:
 - [`RoundWire`]: A round, possible hollow wire with insulation.
 - [`RectangularWire`]: A rectangular wire with insulation.
 - [`StrandedWire`]: A stranded wire composed of multiple other wires.
