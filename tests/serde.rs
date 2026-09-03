@@ -1,3 +1,5 @@
+use std::num::NonZeroUsize;
+
 use indoc::indoc;
 use serde_mosaic::{DatabaseManager, SerdeYaml};
 use stem_wire::prelude::*;
@@ -59,7 +61,7 @@ fn test_load_wire_round() {
         wire.resistance(
             Length::new::<millimeter>(100.0),
             Area::new::<square_meter>(0.0),
-            1,
+            NonZeroUsize::new(1).unwrap(),
             &[ThermodynamicTemperature::new::<degree_celsius>(120.0).into()]
         )
         .get::<ohm>(),
@@ -112,7 +114,7 @@ fn test_load_wire_stranded() {
         wire.resistance(
             Length::new::<meter>(0.1),
             Area::new::<square_millimeter>(0.0),
-            1,
+            NonZeroUsize::new(1).unwrap(),
             &[ThermodynamicTemperature::new::<degree_celsius>(120.0).into()]
         )
         .get::<ohm>(),
@@ -142,7 +144,7 @@ fn test_load_wire_stranded() {
         wire.resistance(
             Length::new::<meter>(0.1),
             Area::new::<square_millimeter>(0.0),
-            1,
+            NonZeroUsize::new(1).unwrap(),
             &[ThermodynamicTemperature::new::<degree_celsius>(120.0).into()]
         )
         .get::<ohm>(),

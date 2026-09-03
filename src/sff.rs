@@ -2,7 +2,7 @@
 This module contains the predefined [`Wire`] type [`SffWire`].
  */
 
-use std::sync::Arc;
+use std::{num::NonZeroUsize, sync::Arc};
 
 use compare_variables::compare_variables;
 use stem_material::prelude::*;
@@ -35,6 +35,7 @@ stranded conductor?) is undefined. This also means that the area of the wire
 depends on the space available to it:
 
 ```
+use std::num::NonZeroUsize;
 use std::sync::Arc;
 use std::f64::consts::PI;
 
@@ -52,36 +53,36 @@ let wire_round = SffWire::new(
 // it. Since the conductor slot fill factor is 0.5, the effective conductor area
 // is 1. Similarily, the total wire area is 1.2
 assert_abs_diff_eq!(
-    wire_round.effective_conductor_area(Area::new::<square_millimeter>(20.0), 10).get::<square_millimeter>(),
+    wire_round.effective_conductor_area(Area::new::<square_millimeter>(20.0), NonZeroUsize::new(10).unwrap()).get::<square_millimeter>(),
     1.0,
     epsilon = 1e-3
 );
 assert_abs_diff_eq!(
-    wire_round.effective_overall_area(Area::new::<square_millimeter>(20.0), 10).get::<square_millimeter>(),
+    wire_round.effective_overall_area(Area::new::<square_millimeter>(20.0), NonZeroUsize::new(10).unwrap()).get::<square_millimeter>(),
     1.2,
     epsilon = 1e-3
 );
 
 // Now the area is increased -> Area per wire increases proportionally:
 assert_abs_diff_eq!(
-    wire_round.effective_conductor_area(Area::new::<square_millimeter>(40.0), 10).get::<square_millimeter>(),
+    wire_round.effective_conductor_area(Area::new::<square_millimeter>(40.0), NonZeroUsize::new(10).unwrap()).get::<square_millimeter>(),
     2.0,
     epsilon = 1e-3
 );
 assert_abs_diff_eq!(
-    wire_round.effective_overall_area(Area::new::<square_millimeter>(40.0), 10).get::<square_millimeter>(),
+    wire_round.effective_overall_area(Area::new::<square_millimeter>(40.0), NonZeroUsize::new(10).unwrap()).get::<square_millimeter>(),
     2.4,
     epsilon = 1e-3
 );
 
 // More wires in the same area means less area per wire:
 assert_abs_diff_eq!(
-    wire_round.effective_conductor_area(Area::new::<square_millimeter>(20.0), 20).get::<square_millimeter>(),
+    wire_round.effective_conductor_area(Area::new::<square_millimeter>(20.0), NonZeroUsize::new(20).unwrap()).get::<square_millimeter>(),
     0.5,
     epsilon = 1e-3
 );
 assert_abs_diff_eq!(
-    wire_round.effective_overall_area(Area::new::<square_millimeter>(20.0), 20).get::<square_millimeter>(),
+    wire_round.effective_overall_area(Area::new::<square_millimeter>(20.0), NonZeroUsize::new(20).unwrap()).get::<square_millimeter>(),
     0.6,
     epsilon = 1e-3
 );
@@ -154,11 +155,11 @@ impl SffWire {
 
 #[cfg_attr(feature = "serde", typetag::serde)]
 impl Wire for SffWire {
-    fn slot_fill_factor_conductor(&self, _zone_area: Area, _turns: usize) -> f64 {
+    fn slot_fill_factor_conductor(&self, _zone_area: Area, _turns: NonZeroUsize) -> f64 {
         return self.slot_fill_factor_conductor;
     }
 
-    fn slot_fill_factor_overall(&self, _zone_area: Area, _turns: usize) -> f64 {
+    fn slot_fill_factor_overall(&self, _zone_area: Area, _turns: NonZeroUsize) -> f64 {
         return self.slot_fill_factor_overall;
     }
 
@@ -170,12 +171,14 @@ impl Wire for SffWire {
         return self.conductor_material.clone();
     }
 
-    fn effective_conductor_area(&self, zone_area: Area, turns: usize) -> Area {
-        return self.slot_fill_factor_conductor(zone_area, turns) * zone_area / turns as f64;
+    fn effective_conductor_area(&self, zone_area: Area, turns: NonZeroUsize) -> Area {
+        return self.slot_fill_factor_conductor(zone_area, turns) * zone_area
+            / usize::from(turns) as f64;
     }
 
-    fn effective_overall_area(&self, zone_area: Area, turns: usize) -> Area {
-        return self.slot_fill_factor_overall(zone_area, turns) * zone_area / turns as f64;
+    fn effective_overall_area(&self, zone_area: Area, turns: NonZeroUsize) -> Area {
+        return self.slot_fill_factor_overall(zone_area, turns) * zone_area
+            / usize::from(turns) as f64;
     }
 }
 

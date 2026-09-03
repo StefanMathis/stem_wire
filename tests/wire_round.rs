@@ -1,4 +1,4 @@
-use std::sync::Arc;
+use std::{num::NonZeroUsize, sync::Arc};
 
 use approxim::{self, assert_abs_diff_eq};
 use stem_wire::prelude::{unary::Linear, *};
@@ -95,7 +95,7 @@ fn test_variable_resistivity() {
         wire.resistance(
             Length::new::<meter>(1.0),
             Area::new::<square_meter>(0.0),
-            1,
+            NonZeroUsize::new(1).unwrap(),
             &conditions
         )
         .get::<ohm>(),

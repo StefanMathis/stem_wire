@@ -1,4 +1,4 @@
-use std::sync::Arc;
+use std::{num::NonZeroUsize, sync::Arc};
 
 use approxim;
 
@@ -29,12 +29,18 @@ fn test_slot_filling_factor() {
     let wire_litz = StrandedWire::new(strand_list).unwrap();
 
     approxim::assert_abs_diff_eq!(
-        wire_litz.slot_fill_factor_conductor(Area::new::<square_millimeter>(40.0), 2),
+        wire_litz.slot_fill_factor_conductor(
+            Area::new::<square_millimeter>(40.0),
+            NonZeroUsize::new(2).unwrap()
+        ),
         0.353429,
         epsilon = 1e-6
     );
     approxim::assert_abs_diff_eq!(
-        wire_litz.slot_fill_factor_overall(Area::new::<square_millimeter>(40.0), 2),
+        wire_litz.slot_fill_factor_overall(
+            Area::new::<square_millimeter>(40.0),
+            NonZeroUsize::new(2).unwrap()
+        ),
         0.436681,
         epsilon = 1e-6
     );
@@ -55,12 +61,18 @@ fn test_slot_filling_factor() {
     let wire_litz = StrandedWire::new(strand_list).unwrap();
 
     approxim::assert_abs_diff_eq!(
-        wire_litz.slot_fill_factor_conductor(Area::new::<square_millimeter>(40.0), 2),
+        wire_litz.slot_fill_factor_conductor(
+            Area::new::<square_millimeter>(40.0),
+            NonZeroUsize::new(2).unwrap()
+        ),
         0.353429,
         epsilon = 1e-6
     ); // Same value as above
     approxim::assert_abs_diff_eq!(
-        wire_litz.slot_fill_factor_overall(Area::new::<square_millimeter>(40.0), 2),
+        wire_litz.slot_fill_factor_overall(
+            Area::new::<square_millimeter>(40.0),
+            NonZeroUsize::new(2).unwrap()
+        ),
         0.508938,
         epsilon = 1e-6
     ); // Changes
@@ -92,14 +104,14 @@ fn test_resistance_calculation() {
     let r1_20 = wire_1.resistance(
         Length::new::<meter>(1.0),
         Area::new::<square_millimeter>(0.0),
-        1,
+        NonZeroUsize::new(1).unwrap(),
         &[],
     );
     approxim::assert_abs_diff_eq!(r1_20.get::<ohm>(), 1.273239, epsilon = 1e-6);
     let r2_20 = wire_2.resistance(
         Length::new::<meter>(1.0),
         Area::new::<square_millimeter>(0.0),
-        1,
+        NonZeroUsize::new(1).unwrap(),
         &[],
     );
     approxim::assert_abs_diff_eq!(r2_20.get::<ohm>(), 0.318309, epsilon = 1e-6);
@@ -113,7 +125,7 @@ fn test_resistance_calculation() {
     let r_litz20 = wire_litz.resistance(
         Length::new::<meter>(1.0),
         Area::new::<square_millimeter>(0.0),
-        1,
+        NonZeroUsize::new(1).unwrap(),
         &[],
     );
     let expected_value = (r1_20 * r2_20 / 2.0) / (r1_20 + r2_20 / 2.0);
@@ -133,7 +145,7 @@ fn test_resistance_calculation() {
     let r_litz20 = wire_litz.resistance(
         Length::new::<meter>(1.0),
         Area::new::<square_millimeter>(0.0),
-        1,
+        NonZeroUsize::new(1).unwrap(),
         &[],
     );
     let expected_value = (r1_20 / 5.0 * r2_20 / 7.0) / (r1_20 / 5.0 + r2_20 / 7.0);
@@ -155,7 +167,7 @@ fn test_resistance_calculation() {
     let r_litz20 = wire_litz.resistance(
         Length::new::<meter>(1.0),
         Area::new::<square_millimeter>(0.0),
-        1,
+        NonZeroUsize::new(1).unwrap(),
         &[],
     );
     approxim::assert_abs_diff_eq!(r_litz20.get::<ohm>(), 0.033506, epsilon = 1e-6);

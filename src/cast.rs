@@ -2,7 +2,7 @@
 This module contains the predefined [`Wire`] type [`CastWire`].
  */
 
-use std::sync::Arc;
+use std::{num::NonZeroUsize, sync::Arc};
 
 use stem_material::prelude::*;
 
@@ -26,6 +26,7 @@ fill factor is always 100%.
 # Examples
 
 ```
+use std::num::NonZeroUsize;
 use std::sync::Arc;
 use std::f64::consts::PI;
 
@@ -36,12 +37,12 @@ use stem_wire::prelude::*;
 let wire_round = CastWire::new(Arc::new(Material::default()));
 
 assert_abs_diff_eq!(
-    wire_round.effective_conductor_area(Area::new::<square_millimeter>(20.0), 1).get::<square_millimeter>(),
+    wire_round.effective_conductor_area(Area::new::<square_millimeter>(20.0), NonZeroUsize::new(1).unwrap()).get::<square_millimeter>(),
     20.0,
     epsilon = 1e-3
 );
 assert_abs_diff_eq!(
-    wire_round.effective_conductor_area(Area::new::<square_millimeter>(50.0), 1).get::<square_millimeter>(),
+    wire_round.effective_conductor_area(Area::new::<square_millimeter>(50.0), NonZeroUsize::new(1).unwrap()).get::<square_millimeter>(),
     50.0,
     epsilon = 1e-3
 );
@@ -49,13 +50,13 @@ assert_abs_diff_eq!(
 // Giving a number of turns greater than 1 does not make any sense, but the
 // function will return a sensible result anyway.
 assert_abs_diff_eq!(
-    wire_round.effective_conductor_area(Area::new::<square_millimeter>(50.0), 2).get::<square_millimeter>(),
+    wire_round.effective_conductor_area(Area::new::<square_millimeter>(50.0), NonZeroUsize::new(2).unwrap()).get::<square_millimeter>(),
     50.0,
     epsilon = 1e-3
 );
 
-assert_eq!(wire_round.slot_fill_factor_conductor(Area::new::<square_millimeter>(20.0), 1), 1.0);
-assert_eq!(wire_round.slot_fill_factor_overall(Area::new::<square_millimeter>(20.0), 1), 1.0);
+assert_eq!(wire_round.slot_fill_factor_conductor(Area::new::<square_millimeter>(20.0), NonZeroUsize::new(1).unwrap()), 1.0);
+assert_eq!(wire_round.slot_fill_factor_overall(Area::new::<square_millimeter>(20.0), NonZeroUsize::new(1).unwrap()), 1.0);
  */
 #[derive(Debug, Clone)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
@@ -88,19 +89,19 @@ impl Wire for CastWire {
         return self.0.clone();
     }
 
-    fn effective_conductor_area(&self, zone_area: Area, _turns_per_slot: usize) -> Area {
+    fn effective_conductor_area(&self, zone_area: Area, _turns: NonZeroUsize) -> Area {
         return zone_area;
     }
 
-    fn effective_overall_area(&self, zone_area: Area, _turns_per_slot: usize) -> Area {
+    fn effective_overall_area(&self, zone_area: Area, _turns: NonZeroUsize) -> Area {
         return zone_area;
     }
 
-    fn slot_fill_factor_conductor(&self, _zone_area: Area, _turns: usize) -> f64 {
+    fn slot_fill_factor_conductor(&self, _zone_area: Area, _turns: NonZeroUsize) -> f64 {
         return 1.0;
     }
 
-    fn slot_fill_factor_overall(&self, _zone_area: Area, _turns: usize) -> f64 {
+    fn slot_fill_factor_overall(&self, _zone_area: Area, _turns: NonZeroUsize) -> f64 {
         return 1.0;
     }
 }

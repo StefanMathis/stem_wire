@@ -22,6 +22,7 @@ pub mod rectangular;
 pub mod round;
 pub mod sff;
 pub mod stranded;
+pub use stem_material;
 
 pub mod prelude {
     /*!

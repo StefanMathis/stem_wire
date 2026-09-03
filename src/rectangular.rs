@@ -2,7 +2,7 @@
 This module contains the predefined [`Wire`] type [`RectangularWire`].
  */
 
-use std::sync::Arc;
+use std::{num::NonZeroUsize, sync::Arc};
 
 use compare_variables::compare_variables;
 
@@ -37,6 +37,7 @@ The effective conductor area is the space between the inner and the outer
 diameter:
 
 ```
+use std::num::NonZeroUsize;
 use std::sync::Arc;
 use std::f64::consts::PI;
 
@@ -52,7 +53,7 @@ let wire_round = RoundWire::new(
 ).expect("valid inputs");
 
 assert_abs_diff_eq!(
-    wire_round.effective_conductor_area(Area::new::<square_millimeter>(20.0), 3).get::<square_millimeter>(),
+    wire_round.effective_conductor_area(Area::new::<square_millimeter>(20.0), NonZeroUsize::new(3).unwrap()).get::<square_millimeter>(),
     PI - 0.25*PI,
     epsilon = 1e-3
 );
@@ -165,6 +166,7 @@ impl RectangularWire {
     # Examples
 
     ```
+    use std::num::NonZeroUsize;
     use std::sync::Arc;
     use stem_wire::prelude::*;
 
@@ -176,7 +178,7 @@ impl RectangularWire {
     ).expect("valid inputs");
     assert_eq!(
         wire.conductor_area(),
-        wire.effective_conductor_area(Default::default(), 0)
+        wire.effective_conductor_area(Default::default(), NonZeroUsize::new(1).unwrap())
     );
     ```
      */
@@ -194,6 +196,7 @@ impl RectangularWire {
     # Examples
 
     ```
+    use std::num::NonZeroUsize;
     use std::sync::Arc;
     use stem_wire::prelude::*;
 
@@ -205,7 +208,7 @@ impl RectangularWire {
     ).expect("valid inputs");
     assert_eq!(
         wire.overall_area(),
-        wire.effective_overall_area(Default::default(), 0)
+        wire.effective_overall_area(Default::default(), NonZeroUsize::new(1).unwrap())
     );
     ```
      */
@@ -225,11 +228,11 @@ impl Wire for RectangularWire {
         return self.conductor_material.clone();
     }
 
-    fn effective_conductor_area(&self, _zone_area: Area, _turns: usize) -> Area {
+    fn effective_conductor_area(&self, _zone_area: Area, _turns: NonZeroUsize) -> Area {
         return self.conductor_area();
     }
 
-    fn effective_overall_area(&self, _zone_area: Area, _turns: usize) -> Area {
+    fn effective_overall_area(&self, _zone_area: Area, _turns: NonZeroUsize) -> Area {
         return self.overall_area();
     }
 }

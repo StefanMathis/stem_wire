@@ -10,6 +10,7 @@ a winding if it implements the [`Wire`] trait. See its docstring for more.
 
 use dyn_clone::DynClone;
 use std::any::Any;
+use std::num::NonZeroUsize;
 use std::sync::Arc;
 use stem_material::prelude::*;
 
@@ -77,6 +78,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     # Examples
 
     ```
+    use std::num::NonZeroUsize;
     use std::sync::Arc;
     use std::f64::consts::PI;
 
@@ -89,10 +91,10 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     // SffWire: Cross section depends on zone area
     let wire_sff = SffWire::new(m.clone(), 0.5, 0.6).expect("valid inputs");
     assert_abs_diff_eq!(
-        wire_sff.effective_conductor_area(Area::new::<square_millimeter>(20.0), 3).get::<square_millimeter>(),
+        wire_sff.effective_conductor_area(Area::new::<square_millimeter>(20.0), NonZeroUsize::new(3).unwrap()).get::<square_millimeter>(),
         3.333, epsilon = 1e-3);
     assert_abs_diff_eq!(
-        wire_sff.effective_conductor_area(Area::new::<square_millimeter>(200.0), 25).get::<square_millimeter>(),
+        wire_sff.effective_conductor_area(Area::new::<square_millimeter>(200.0), NonZeroUsize::new(25).unwrap()).get::<square_millimeter>(),
         4.0, epsilon = 1e-3);
 
     // RoundWire: Cross section is defined by wire properties
@@ -103,14 +105,14 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
         Length::new::<millimeter>(0.1)
     ).expect("valid inputs");
     assert_abs_diff_eq!(
-        wire_round.effective_conductor_area(Area::new::<square_millimeter>(20.0), 3).get::<square_millimeter>(),
+        wire_round.effective_conductor_area(Area::new::<square_millimeter>(20.0), NonZeroUsize::new(3).unwrap()).get::<square_millimeter>(),
         PI, epsilon = 1e-3);
     assert_abs_diff_eq!(
-        wire_round.effective_conductor_area(Area::new::<square_millimeter>(200.0), 25).get::<square_millimeter>(),
+        wire_round.effective_conductor_area(Area::new::<square_millimeter>(200.0), NonZeroUsize::new(25).unwrap()).get::<square_millimeter>(),
         PI, epsilon = 1e-3);
     ```
      */
-    fn effective_conductor_area(&self, zone_area: Area, turns: usize) -> Area;
+    fn effective_conductor_area(&self, zone_area: Area, turns: NonZeroUsize) -> Area;
 
     /**
     Returns the overall area covered by the wire.
@@ -122,6 +124,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     # Examples
 
     ```
+    use std::num::NonZeroUsize;
     use std::sync::Arc;
     use std::f64::consts::PI;
 
@@ -134,10 +137,10 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     // SffWire: Cross section depends on zone area
     let wire_sff = SffWire::new(m.clone(), 0.5, 0.6).expect("valid inputs");
     assert_abs_diff_eq!(
-        wire_sff.effective_overall_area(Area::new::<square_millimeter>(20.0), 3).get::<square_millimeter>(),
+        wire_sff.effective_overall_area(Area::new::<square_millimeter>(20.0), NonZeroUsize::new(3).unwrap()).get::<square_millimeter>(),
         4.0, epsilon = 1e-3);
     assert_abs_diff_eq!(
-        wire_sff.effective_overall_area(Area::new::<square_millimeter>(200.0), 25).get::<square_millimeter>(),
+        wire_sff.effective_overall_area(Area::new::<square_millimeter>(200.0), NonZeroUsize::new(25).unwrap()).get::<square_millimeter>(),
         4.8, epsilon = 1e-3);
 
     // RoundWire: Cross section is defined by wire properties
@@ -148,14 +151,14 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
         Length::new::<millimeter>(0.1)
     ).expect("valid inputs");
     assert_abs_diff_eq!(
-        wire_round.effective_overall_area(Area::new::<square_millimeter>(20.0), 4).get::<square_millimeter>(),
+        wire_round.effective_overall_area(Area::new::<square_millimeter>(20.0), NonZeroUsize::new(4).unwrap()).get::<square_millimeter>(),
         1.21*PI, epsilon = 1e-3);
     assert_abs_diff_eq!(
-        wire_round.effective_overall_area(Area::new::<square_millimeter>(200.0), 25).get::<square_millimeter>(),
+        wire_round.effective_overall_area(Area::new::<square_millimeter>(200.0), NonZeroUsize::new(25).unwrap()).get::<square_millimeter>(),
         1.21*PI, epsilon = 1e-3);
     ```
      */
-    fn effective_overall_area(&self, zone_area: Area, turns: usize) -> Area;
+    fn effective_overall_area(&self, zone_area: Area, turns: NonZeroUsize) -> Area;
 
     // =========================================================================
 
@@ -195,6 +198,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     # Examples
 
     ```
+    use std::num::NonZeroUsize;
     use std::sync::Arc;
     use std::f64::consts::PI;
 
@@ -223,7 +227,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
         wire.resistance(
             Length::new::<millimeter>(2000.0),
             Area::new::<square_millimeter>(0.0),
-            1,
+            NonZeroUsize::new(1).unwrap(),
             &[ThermodynamicTemperature::new::<degree_celsius>(0.0).into()]
         )
         .get::<ohm>(),
@@ -234,7 +238,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
         wire.resistance(
             Length::new::<millimeter>(2000.0),
             Area::new::<square_millimeter>(0.0),
-            1,
+            NonZeroUsize::new(1).unwrap(),
             &[ThermodynamicTemperature::new::<degree_celsius>(20.0).into()]
         )
         .get::<ohm>(),
@@ -247,7 +251,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
         &self,
         length: Length,
         zone_area: Area,
-        turns: usize,
+        turns: NonZeroUsize,
         conditions: &[DynQuantity<f64>],
     ) -> ElectricalResistance {
         return length * self.material().electrical_resistivity.get(conditions)
@@ -267,6 +271,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     # Examples
 
     ```
+    use std::num::NonZeroUsize;
     use std::sync::Arc;
     use std::f64::consts::PI;
 
@@ -279,7 +284,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     // SffWire: Cross section depends on zone area
     let wire_sff = SffWire::new(m.clone(), 0.5, 0.6).expect("valid inputs");
     assert_abs_diff_eq!(
-        wire_sff.slot_fill_factor_conductor(Area::new::<square_millimeter>(200.0), 25),
+        wire_sff.slot_fill_factor_conductor(Area::new::<square_millimeter>(200.0), NonZeroUsize::new(25).unwrap()),
         0.5, epsilon = 1e-3);
 
     // RoundWire: Cross section is defined by wire properties
@@ -290,12 +295,13 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
         Length::new::<millimeter>(0.1)
     ).expect("valid inputs");
     assert_abs_diff_eq!(
-        wire_round.slot_fill_factor_conductor(Area::new::<square_millimeter>(200.0), 25),
+        wire_round.slot_fill_factor_conductor(Area::new::<square_millimeter>(200.0), NonZeroUsize::new(25).unwrap()),
         0.393, epsilon = 1e-3);
     ```
      */
-    fn slot_fill_factor_conductor(&self, zone_area: Area, turns: usize) -> f64 {
-        return (self.effective_conductor_area(zone_area, turns) * turns as f64 / zone_area)
+    fn slot_fill_factor_conductor(&self, zone_area: Area, turns: NonZeroUsize) -> f64 {
+        return (self.effective_conductor_area(zone_area, turns) * usize::from(turns) as f64
+            / zone_area)
             .get::<ratio>();
     }
 
@@ -312,6 +318,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     # Examples
 
     ```
+    use std::num::NonZeroUsize;
     use std::sync::Arc;
     use std::f64::consts::PI;
 
@@ -324,7 +331,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     // SffWire: Cross section depends on zone area
     let wire_sff = SffWire::new(m.clone(), 0.5, 0.6).expect("valid inputs");
     assert_abs_diff_eq!(
-        wire_sff.slot_fill_factor_overall(Area::new::<square_millimeter>(200.0), 25),
+        wire_sff.slot_fill_factor_overall(Area::new::<square_millimeter>(200.0), NonZeroUsize::new(25).unwrap()),
         0.6, epsilon = 1e-3);
 
     // RoundWire: Cross section is defined by wire properties
@@ -335,12 +342,13 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
         Length::new::<millimeter>(0.1)
     ).expect("valid inputs");
     assert_abs_diff_eq!(
-        wire_round.slot_fill_factor_overall(Area::new::<square_millimeter>(200.0), 25),
+        wire_round.slot_fill_factor_overall(Area::new::<square_millimeter>(200.0), NonZeroUsize::new(25).unwrap()),
         0.475, epsilon = 1e-3);
     ```
     */
-    fn slot_fill_factor_overall(&self, zone_area: Area, turns: usize) -> f64 {
-        return (self.effective_overall_area(zone_area, turns) * turns as f64 / zone_area)
+    fn slot_fill_factor_overall(&self, zone_area: Area, turns: NonZeroUsize) -> f64 {
+        return (self.effective_overall_area(zone_area, turns) * usize::from(turns) as f64
+            / zone_area)
             .get::<ratio>();
     }
 }

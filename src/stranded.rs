@@ -224,7 +224,7 @@ impl Wire for StrandedWire {
         return unsafe { self.0.get_unchecked(0) }.wire.material_arc();
     }
 
-    fn effective_conductor_area(&self, zone_area: Area, turns: usize) -> Area {
+    fn effective_conductor_area(&self, zone_area: Area, turns: NonZeroUsize) -> Area {
         return self
             .0
             .as_slice()
@@ -236,7 +236,7 @@ impl Wire for StrandedWire {
             .sum();
     }
 
-    fn effective_overall_area(&self, zone_area: Area, turns: usize) -> Area {
+    fn effective_overall_area(&self, zone_area: Area, turns: NonZeroUsize) -> Area {
         return self
             .0
             .as_slice()
