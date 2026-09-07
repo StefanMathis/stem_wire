@@ -95,7 +95,7 @@ fn test_variable_resistivity() {
         wire.resistance(
             Length::new::<meter>(1.0),
             Area::new::<square_meter>(0.0),
-            NonZeroUsize::new(1).unwrap(),
+            NonZeroUsize::MIN,
             &conditions
         )
         .get::<ohm>(),

@@ -37,12 +37,12 @@ use stem_wire::prelude::*;
 let wire_round = CastWire::new(Arc::new(Material::default()));
 
 assert_abs_diff_eq!(
-    wire_round.effective_conductor_area(Area::new::<square_millimeter>(20.0), NonZeroUsize::new(1).unwrap()).get::<square_millimeter>(),
+    wire_round.effective_conductor_area(Area::new::<square_millimeter>(20.0), NonZeroUsize::MIN).get::<square_millimeter>(),
     20.0,
     epsilon = 1e-3
 );
 assert_abs_diff_eq!(
-    wire_round.effective_conductor_area(Area::new::<square_millimeter>(50.0), NonZeroUsize::new(1).unwrap()).get::<square_millimeter>(),
+    wire_round.effective_conductor_area(Area::new::<square_millimeter>(50.0), NonZeroUsize::MIN).get::<square_millimeter>(),
     50.0,
     epsilon = 1e-3
 );
@@ -55,8 +55,8 @@ assert_abs_diff_eq!(
     epsilon = 1e-3
 );
 
-assert_eq!(wire_round.slot_fill_factor_conductor(Area::new::<square_millimeter>(20.0), NonZeroUsize::new(1).unwrap()), 1.0);
-assert_eq!(wire_round.slot_fill_factor_overall(Area::new::<square_millimeter>(20.0), NonZeroUsize::new(1).unwrap()), 1.0);
+assert_eq!(wire_round.slot_fill_factor_conductor(Area::new::<square_millimeter>(20.0), NonZeroUsize::MIN), 1.0);
+assert_eq!(wire_round.slot_fill_factor_overall(Area::new::<square_millimeter>(20.0), NonZeroUsize::MIN), 1.0);
  */
 #[derive(Debug, Clone)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]

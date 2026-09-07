@@ -178,7 +178,7 @@ impl RectangularWire {
     ).expect("valid inputs");
     assert_eq!(
         wire.conductor_area(),
-        wire.effective_conductor_area(Default::default(), NonZeroUsize::new(1).unwrap())
+        wire.effective_conductor_area(Default::default(), NonZeroUsize::MIN)
     );
     ```
      */
@@ -208,7 +208,7 @@ impl RectangularWire {
     ).expect("valid inputs");
     assert_eq!(
         wire.overall_area(),
-        wire.effective_overall_area(Default::default(), NonZeroUsize::new(1).unwrap())
+        wire.effective_overall_area(Default::default(), NonZeroUsize::MIN)
     );
     ```
      */

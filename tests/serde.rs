@@ -61,7 +61,7 @@ fn test_load_wire_round() {
         wire.resistance(
             Length::new::<millimeter>(100.0),
             Area::new::<square_meter>(0.0),
-            NonZeroUsize::new(1).unwrap(),
+            NonZeroUsize::MIN,
             &[ThermodynamicTemperature::new::<degree_celsius>(120.0).into()]
         )
         .get::<ohm>(),
@@ -114,7 +114,7 @@ fn test_load_wire_stranded() {
         wire.resistance(
             Length::new::<meter>(0.1),
             Area::new::<square_millimeter>(0.0),
-            NonZeroUsize::new(1).unwrap(),
+            NonZeroUsize::MIN,
             &[ThermodynamicTemperature::new::<degree_celsius>(120.0).into()]
         )
         .get::<ohm>(),
@@ -144,7 +144,7 @@ fn test_load_wire_stranded() {
         wire.resistance(
             Length::new::<meter>(0.1),
             Area::new::<square_millimeter>(0.0),
-            NonZeroUsize::new(1).unwrap(),
+            NonZeroUsize::MIN,
             &[ThermodynamicTemperature::new::<degree_celsius>(120.0).into()]
         )
         .get::<ohm>(),

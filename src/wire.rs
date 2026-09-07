@@ -227,7 +227,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
         wire.resistance(
             Length::new::<millimeter>(2000.0),
             Area::new::<square_millimeter>(0.0),
-            NonZeroUsize::new(1).unwrap(),
+            NonZeroUsize::MIN,
             &[ThermodynamicTemperature::new::<degree_celsius>(0.0).into()]
         )
         .get::<ohm>(),
@@ -238,7 +238,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
         wire.resistance(
             Length::new::<millimeter>(2000.0),
             Area::new::<square_millimeter>(0.0),
-            NonZeroUsize::new(1).unwrap(),
+            NonZeroUsize::MIN,
             &[ThermodynamicTemperature::new::<degree_celsius>(20.0).into()]
         )
         .get::<ohm>(),
