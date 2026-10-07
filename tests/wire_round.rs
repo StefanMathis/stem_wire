@@ -74,7 +74,7 @@ fn test_cross_section_area() {
 fn test_variable_resistivity() {
     let mut mat = Material::default();
     mat.set_electrical_resistivity(
-        VarQuantity::try_from_quantity_function(Linear::new(
+        VarQuantity::new(Linear::new(
             DynQuantity::new(1.0, PredefUnit::ElectricResistivity),
             DynQuantity::new(2.0, PredefUnit::ElectricResistivity),
         ))

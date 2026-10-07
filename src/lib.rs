@@ -40,7 +40,9 @@ pub mod prelude {
     pub use crate::wire::Wire;
     pub use stem_material;
 
-    // Prevent rustdoc from documenting the stem_material dependency
     #[doc(hidden)]
     pub use stem_material::prelude::*;
+
+    #[doc(hidden)]
+    pub use stem_material::var_quantity;
 }

@@ -10,10 +10,11 @@ repository = "https://github.com/StefanMathis/stem_wire.git"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-stem_material = { version = "0.4.0" }
+# stem_material = { version = "0.4.0" }
+stem_material = { path = "../stem_material" } 
 rayon = "1.5"
 serde_mosaic = { version = "0.3", optional = true, features = ["serde_yaml"] }
-deserialize_untagged_verbose_error = { version = "0.1", optional = true }
+deserialize_untagged_verbose_error = { version = "0.1.8", optional = true }
 serde = { version = "1", features = ["derive", "rc"], optional = true }
 compare_variables = { version = "0.3", features = ["proc_macro"] }
 dyn-clone = "1"

@@ -208,7 +208,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
 
     let mut mat = Material::default();
     mat.set_electrical_resistivity(
-        VarQuantity::try_from_quantity_function(Linear::new(
+        VarQuantity::new(Linear::new(
             1.0.into(),
             DynQuantity::new(2.0, PredefUnit::ElectricResistivity),
         ))
