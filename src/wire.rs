@@ -72,7 +72,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     It is an abstract wire defined by just the slot fill factor; its cross
     section is hence calculated as `slot_fill_factor * zone_area / turns`.
     On the other hand, the cross section of a
-    [`RoundWire`](crate::round::RoundWire) is just `pi * radius²` and both
+    [`RoundWire`](crate::round::RoundWire) is just `π * radius²` and both
     `zone_area` and `turns` are not used at all.
 
     # Examples

@@ -88,7 +88,7 @@ assert_abs_diff_eq!(
 );
 ```
  */
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone)]
 #[cfg_attr(feature = "serde", derive(Serialize))]
 #[cfg_attr(feature = "serde", serde(deny_unknown_fields))]
 pub struct SffWire {
@@ -150,6 +150,16 @@ impl SffWire {
         compare_variables!(0.0 <= self.slot_fill_factor_overall <= 1.0)?;
         compare_variables!(self.slot_fill_factor_conductor <= self.slot_fill_factor_overall)?;
         return Ok(self);
+    }
+}
+
+impl Default for SffWire {
+    fn default() -> Self {
+        Self {
+            conductor_material: Default::default(),
+            slot_fill_factor_conductor: 1.0,
+            slot_fill_factor_overall: 1.0,
+        }
     }
 }
 
