@@ -228,8 +228,8 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
             Length::new::<millimeter>(2000.0),
             Area::new::<square_millimeter>(0.0),
             NonZeroUsize::MIN,
-            &[ThermodynamicTemperature::new::<degree_celsius>(0.0).into()]
         )
+        .get(&[ThermodynamicTemperature::new::<degree_celsius>(0.0).into()])
         .get::<ohm>(),
         5.092,
         epsilon = 1e-3
@@ -239,8 +239,8 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
             Length::new::<millimeter>(2000.0),
             Area::new::<square_millimeter>(0.0),
             NonZeroUsize::MIN,
-            &[ThermodynamicTemperature::new::<degree_celsius>(20.0).into()]
         )
+        .get(&[ThermodynamicTemperature::new::<degree_celsius>(20.0).into()])
         .get::<ohm>(),
         5.092,
         epsilon = 1e-3
@@ -252,10 +252,9 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
         length: Length,
         zone_area: Area,
         turns: NonZeroUsize,
-        conditions: &[DynQuantity<f64>],
-    ) -> ElectricalResistance {
-        return length * self.material().electrical_resistivity.get(conditions)
-            / self.effective_conductor_area(zone_area, turns);
+    ) -> VarQuantity<ElectricalResistance> {
+        VarQuantity::from(length / self.effective_conductor_area(zone_area, turns))
+            * self.material().electrical_resistivity.clone()
     }
 
     /**

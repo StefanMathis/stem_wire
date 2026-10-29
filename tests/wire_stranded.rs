@@ -105,16 +105,14 @@ fn test_resistance_calculation() {
         Length::new::<meter>(1.0),
         Area::new::<square_millimeter>(0.0),
         NonZeroUsize::MIN,
-        &[],
     );
-    approxim::assert_abs_diff_eq!(r1_20.get::<ohm>(), 1.273239, epsilon = 1e-6);
+    approxim::assert_abs_diff_eq!(r1_20.get(&[]).get::<ohm>(), 1.273239, epsilon = 1e-6);
     let r2_20 = wire_2.resistance(
         Length::new::<meter>(1.0),
         Area::new::<square_millimeter>(0.0),
         NonZeroUsize::MIN,
-        &[],
     );
-    approxim::assert_abs_diff_eq!(r2_20.get::<ohm>(), 0.318309, epsilon = 1e-6);
+    approxim::assert_abs_diff_eq!(r2_20.get(&[]).get::<ohm>(), 0.318309, epsilon = 1e-6);
 
     let strand_list = vec![
         WireGroup::new(Box::new(wire_1.clone()), 1.try_into().unwrap()),
@@ -126,11 +124,11 @@ fn test_resistance_calculation() {
         Length::new::<meter>(1.0),
         Area::new::<square_millimeter>(0.0),
         NonZeroUsize::MIN,
-        &[],
     );
-    let expected_value = (r1_20 * r2_20 / 2.0) / (r1_20 + r2_20 / 2.0);
+    let expected_value =
+        (r1_20.get(&[]) * r2_20.get(&[]) / 2.0) / (r1_20.get(&[]) + r2_20.get(&[]) / 2.0);
     approxim::assert_abs_diff_eq!(
-        r_litz20.get::<ohm>(),
+        r_litz20.get(&[]).get::<ohm>(),
         expected_value.get::<ohm>(),
         epsilon = 1e-6
     );
@@ -146,11 +144,11 @@ fn test_resistance_calculation() {
         Length::new::<meter>(1.0),
         Area::new::<square_millimeter>(0.0),
         NonZeroUsize::MIN,
-        &[],
     );
-    let expected_value = (r1_20 / 5.0 * r2_20 / 7.0) / (r1_20 / 5.0 + r2_20 / 7.0);
+    let expected_value = (r1_20.get(&[]) / 5.0 * r2_20.get(&[]) / 7.0)
+        / (r1_20.get(&[]) / 5.0 + r2_20.get(&[]) / 7.0);
     approxim::assert_abs_diff_eq!(
-        r_litz20.get::<ohm>(),
+        r_litz20.get(&[]).get::<ohm>(),
         expected_value.get::<ohm>(),
         epsilon = 1e-6
     );
@@ -168,9 +166,8 @@ fn test_resistance_calculation() {
         Length::new::<meter>(1.0),
         Area::new::<square_millimeter>(0.0),
         NonZeroUsize::MIN,
-        &[],
     );
-    approxim::assert_abs_diff_eq!(r_litz20.get::<ohm>(), 0.033506, epsilon = 1e-6);
+    approxim::assert_abs_diff_eq!(r_litz20.get(&[]).get::<ohm>(), 0.033506, epsilon = 1e-6);
 }
 
 /**

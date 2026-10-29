@@ -96,8 +96,8 @@ fn test_variable_resistivity() {
             Length::new::<meter>(1.0),
             Area::new::<square_meter>(0.0),
             NonZeroUsize::MIN,
-            &conditions
         )
+        .get(&conditions)
         .get::<ohm>(),
         2.546,
         epsilon = 1e-3
