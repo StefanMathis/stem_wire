@@ -27,7 +27,7 @@ serde = ["dep:serde_mosaic", "dep:deserialize_untagged_verbose_error", "dep:serd
 [dev-dependencies]
 approxim = { version = "0.6" }
 indoc = "1.0"
-yaml_serde = "0.10.6"
+serde_yaml = "0.8"
 stem_wire = { path = ".", features = ["serde"] } # Solution from https://stackoverflow.com/questions/68618789/is-it-possible-to-enable-a-rust-feature-only-in-test to enable feature during integration test
 
 [package.metadata.docs.rs]

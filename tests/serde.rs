@@ -63,7 +63,7 @@ fn test_load_wire_round() {
             Area::new::<square_meter>(0.0),
             NonZeroUsize::MIN,
         )
-        .get(&[ThermodynamicTemperature::new::<degree_celsius>(120.0).into()])
+        .eval(&[ThermodynamicTemperature::new::<degree_celsius>(120.0).into()])
         .get::<ohm>(),
         0.00316718,
         epsilon = 1e-6
@@ -116,7 +116,7 @@ fn test_load_wire_stranded() {
             Area::new::<square_millimeter>(0.0),
             NonZeroUsize::MIN,
         )
-        .get(&[ThermodynamicTemperature::new::<degree_celsius>(120.0).into()])
+        .eval(&[ThermodynamicTemperature::new::<degree_celsius>(120.0).into()])
         .get::<ohm>(),
         0.00316718 / 3.0,
         epsilon = 1e-6
@@ -146,7 +146,7 @@ fn test_load_wire_stranded() {
             Area::new::<square_millimeter>(0.0),
             NonZeroUsize::MIN,
         )
-        .get(&[ThermodynamicTemperature::new::<degree_celsius>(120.0).into()])
+        .eval(&[ThermodynamicTemperature::new::<degree_celsius>(120.0).into()])
         .get::<ohm>(),
         0.0079798 / 3.0,
         epsilon = 1e-6

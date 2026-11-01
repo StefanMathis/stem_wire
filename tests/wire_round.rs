@@ -75,8 +75,8 @@ fn test_variable_resistivity() {
     let mut mat = Material::default();
     mat.set_electrical_resistivity(
         VarQuantity::new(Linear::new(
-            DynQuantity::new(1.0, PredefUnit::ElectricResistivity),
-            DynQuantity::new(2.0, PredefUnit::ElectricResistivity),
+            DynQuantity::new(1.0, PredefUnit::ElectricalResistivity),
+            DynQuantity::new(2.0, PredefUnit::ElectricalResistivity),
         ))
         .unwrap(),
     );
@@ -97,7 +97,7 @@ fn test_variable_resistivity() {
             Area::new::<square_meter>(0.0),
             NonZeroUsize::MIN,
         )
-        .get(&conditions)
+        .eval(&conditions)
         .get::<ohm>(),
         2.546,
         epsilon = 1e-3

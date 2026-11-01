@@ -81,9 +81,9 @@ fn test_slot_filling_factor() {
 #[test]
 fn test_resistance_calculation() {
     let mut material = Material::default();
-    material.set_electrical_resistivity(VarQuantity::Constant(ElectricalResistivity::new::<
-        ohm_meter,
-    >(1.0)));
+    material.set_electrical_resistivity(VarQuantity::from(
+        ElectricalResistivity::new::<ohm_meter>(1.0),
+    ));
     let material = Arc::new(material);
 
     let wire_1 = RoundWire::new(
@@ -106,13 +106,13 @@ fn test_resistance_calculation() {
         Area::new::<square_millimeter>(0.0),
         NonZeroUsize::MIN,
     );
-    approxim::assert_abs_diff_eq!(r1_20.get(&[]).get::<ohm>(), 1.273239, epsilon = 1e-6);
+    approxim::assert_abs_diff_eq!(r1_20.eval(&[]).get::<ohm>(), 1.273239, epsilon = 1e-6);
     let r2_20 = wire_2.resistance(
         Length::new::<meter>(1.0),
         Area::new::<square_millimeter>(0.0),
         NonZeroUsize::MIN,
     );
-    approxim::assert_abs_diff_eq!(r2_20.get(&[]).get::<ohm>(), 0.318309, epsilon = 1e-6);
+    approxim::assert_abs_diff_eq!(r2_20.eval(&[]).get::<ohm>(), 0.318309, epsilon = 1e-6);
 
     let strand_list = vec![
         WireGroup::new(Box::new(wire_1.clone()), 1.try_into().unwrap()),
@@ -125,11 +125,12 @@ fn test_resistance_calculation() {
         Area::new::<square_millimeter>(0.0),
         NonZeroUsize::MIN,
     );
-    let expected_value =
-        (r1_20.get(&[]) * r2_20.get(&[]) / 2.0) / (r1_20.get(&[]) + r2_20.get(&[]) / 2.0);
+    let expected_value: VarQuantity<ElectricalResistance> = (r1_20.clone() * &r2_20
+        / VarQuantity::from(2.0))
+        / (r1_20.clone() + r2_20.clone() / VarQuantity::from(2.0));
     approxim::assert_abs_diff_eq!(
-        r_litz20.get(&[]).get::<ohm>(),
-        expected_value.get::<ohm>(),
+        r_litz20.eval(&[]).get::<ohm>(),
+        expected_value.eval(&[]).get::<ohm>(),
         epsilon = 1e-6
     );
 
@@ -145,11 +146,12 @@ fn test_resistance_calculation() {
         Area::new::<square_millimeter>(0.0),
         NonZeroUsize::MIN,
     );
-    let expected_value = (r1_20.get(&[]) / 5.0 * r2_20.get(&[]) / 7.0)
-        / (r1_20.get(&[]) / 5.0 + r2_20.get(&[]) / 7.0);
+    let expected_value: VarQuantity<ElectricalResistance> =
+        (r1_20.clone() / VarQuantity::from(5.0) * r2_20.clone() / VarQuantity::from(7.0))
+            / (r1_20.clone() / VarQuantity::from(5.0) + r2_20.clone() / VarQuantity::from(7.0));
     approxim::assert_abs_diff_eq!(
-        r_litz20.get(&[]).get::<ohm>(),
-        expected_value.get::<ohm>(),
+        r_litz20.eval(&[]).get::<ohm>(),
+        expected_value.eval(&[]).get::<ohm>(),
         epsilon = 1e-6
     );
 
@@ -167,7 +169,7 @@ fn test_resistance_calculation() {
         Area::new::<square_millimeter>(0.0),
         NonZeroUsize::MIN,
     );
-    approxim::assert_abs_diff_eq!(r_litz20.get(&[]).get::<ohm>(), 0.033506, epsilon = 1e-6);
+    approxim::assert_abs_diff_eq!(r_litz20.eval(&[]).get::<ohm>(), 0.033506, epsilon = 1e-6);
 }
 
 /**
@@ -178,9 +180,9 @@ fn test_wire_with_different_materials() {
     // Different pointers
     {
         let mut mat_1 = Material::default();
-        mat_1.set_electrical_resistivity(VarQuantity::Constant(ElectricalResistivity::new::<
-            ohm_meter,
-        >(1.0)));
+        mat_1.set_electrical_resistivity(VarQuantity::from(
+            ElectricalResistivity::new::<ohm_meter>(1.0),
+        ));
         let mat_1 = Arc::new(mat_1);
 
         let wire_1 = RoundWire::new(
@@ -192,9 +194,9 @@ fn test_wire_with_different_materials() {
         .unwrap();
 
         let mut mat_2 = Material::default();
-        mat_2.set_electrical_resistivity(VarQuantity::Constant(ElectricalResistivity::new::<
-            ohm_meter,
-        >(2.0)));
+        mat_2.set_electrical_resistivity(VarQuantity::from(
+            ElectricalResistivity::new::<ohm_meter>(2.0),
+        ));
         let mat_2 = Arc::new(mat_2);
 
         let wire_2 = RoundWire::new(
@@ -215,9 +217,9 @@ fn test_wire_with_different_materials() {
     // Different pointers, but same material data - this succeeds
     {
         let mut mat_1 = Material::default();
-        mat_1.set_electrical_resistivity(VarQuantity::Constant(ElectricalResistivity::new::<
-            ohm_meter,
-        >(1.0)));
+        mat_1.set_electrical_resistivity(VarQuantity::from(
+            ElectricalResistivity::new::<ohm_meter>(1.0),
+        ));
         let mat_1 = Arc::new(mat_1);
 
         let wire_1 = RoundWire::new(
@@ -229,9 +231,9 @@ fn test_wire_with_different_materials() {
         .unwrap();
 
         let mut mat_2 = Material::default();
-        mat_2.set_electrical_resistivity(VarQuantity::Constant(ElectricalResistivity::new::<
-            ohm_meter,
-        >(1.0)));
+        mat_2.set_electrical_resistivity(VarQuantity::from(
+            ElectricalResistivity::new::<ohm_meter>(1.0),
+        ));
         let mat_2 = Arc::new(mat_2);
 
         let wire_2 = RoundWire::new(
@@ -252,9 +254,9 @@ fn test_wire_with_different_materials() {
     // Different pointers and different material data - this fails
     {
         let mut mat_1 = Material::default();
-        mat_1.set_electrical_resistivity(VarQuantity::Constant(ElectricalResistivity::new::<
-            ohm_meter,
-        >(1.0)));
+        mat_1.set_electrical_resistivity(VarQuantity::from(
+            ElectricalResistivity::new::<ohm_meter>(1.0),
+        ));
         let mat_1 = Arc::new(mat_1);
 
         let wire_1 = RoundWire::new(
@@ -266,9 +268,9 @@ fn test_wire_with_different_materials() {
         .unwrap();
 
         let mut mat_2 = Material::default();
-        mat_2.set_electrical_resistivity(VarQuantity::Constant(ElectricalResistivity::new::<
-            ohm_meter,
-        >(2.0)));
+        mat_2.set_electrical_resistivity(VarQuantity::from(
+            ElectricalResistivity::new::<ohm_meter>(2.0),
+        ));
         let mat_2 = Arc::new(mat_2);
 
         let wire_2 = RoundWire::new(
@@ -289,9 +291,9 @@ fn test_wire_with_different_materials() {
     // Same pointer - this succeeds
     {
         let mut mat_1 = Material::default();
-        mat_1.set_electrical_resistivity(VarQuantity::Constant(ElectricalResistivity::new::<
-            ohm_meter,
-        >(1.0)));
+        mat_1.set_electrical_resistivity(VarQuantity::from(
+            ElectricalResistivity::new::<ohm_meter>(1.0),
+        ));
         let mat_1 = Arc::new(mat_1);
 
         let wire_1 = RoundWire::new(

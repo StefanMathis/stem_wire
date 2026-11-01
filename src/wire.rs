@@ -210,7 +210,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
     mat.set_electrical_resistivity(
         VarQuantity::new(Linear::new(
             1.0.into(),
-            DynQuantity::new(2.0, PredefUnit::ElectricResistivity),
+            DynQuantity::new(2.0, PredefUnit::ElectricalResistivity),
         ))
         .unwrap(),
     );
@@ -229,7 +229,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
             Area::new::<square_millimeter>(0.0),
             NonZeroUsize::MIN,
         )
-        .get(&[ThermodynamicTemperature::new::<degree_celsius>(0.0).into()])
+        .eval(&[ThermodynamicTemperature::new::<degree_celsius>(0.0).into()])
         .get::<ohm>(),
         5.092,
         epsilon = 1e-3
@@ -240,7 +240,7 @@ pub trait Wire: Sync + Send + DynClone + std::fmt::Debug + Any {
             Area::new::<square_millimeter>(0.0),
             NonZeroUsize::MIN,
         )
-        .get(&[ThermodynamicTemperature::new::<degree_celsius>(20.0).into()])
+        .eval(&[ThermodynamicTemperature::new::<degree_celsius>(20.0).into()])
         .get::<ohm>(),
         5.092,
         epsilon = 1e-3
