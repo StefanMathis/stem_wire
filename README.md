@@ -15,7 +15,9 @@ modify the components. -->
 
 [![Documentation](https://docs.rs/stem_wire/badge.svg)](https://docs.rs/stem_wire)
 
-Wire definition for stem - a Simulation Toolbox for Electric Motors.
+Wire definition for stem – a Simulation Toolbox for Electric Motors. The
+[stem book](https://stefanmathis.github.io/stem_book/) provides a comprehensive
+guide to the framework, while this crate's documentation describes its API.
 
 The full API documentation is available at <https://docs.rs/stem_wire/0.3.0/stem_wire>.
 
