@@ -7,7 +7,9 @@
 [`CastWire`]: crate::cast::CastWire
 [`resistance`]: crate::resistance
 
-Composable serialization and deserialization for Rust structs.
+Wire definition for stem – a Simulation Toolbox for Electric Motors. The
+[stem book](https://stefanmathis.github.io/stem_book/) provides a comprehensive
+guide to the framework, while this crate's documentation describes its API.
 
  */
 #![doc = include_str!("../docs/main.md")]
