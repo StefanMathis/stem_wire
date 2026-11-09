@@ -56,33 +56,24 @@ let wire_b = RoundWire::new(
 
 // Returns OK because the vector of wires was not empty
 assert!(StrandedWire::new(vec![
-    WireGroup::new(Box::new(wire_a), NonZero::new(3).unwrap()),
-    WireGroup::new(Box::new(wire_b), NonZero::new(2).unwrap()),
+    WireGroup::new(Arc::new(wire_a), NonZero::new(3).unwrap()),
+    WireGroup::new(Arc::new(wire_b), NonZero::new(2).unwrap()),
 ]).is_ok());
 ```
 */
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct WireGroup {
     /// The wire used in the group.
-    pub wire: Box<dyn Wire>,
+    pub wire: Arc<dyn Wire>,
     /// Number of times [`WireGroup::wire`] appears in the group.
     pub number_wires: NonZeroUsize,
 }
 
 impl WireGroup {
     /// Returns a new wire group from the wire type and the number of wires.
-    pub fn new(wire: Box<dyn Wire>, number_wires: NonZeroUsize) -> Self {
+    pub fn new(wire: Arc<dyn Wire>, number_wires: NonZeroUsize) -> Self {
         return Self { wire, number_wires };
-    }
-}
-
-impl Clone for WireGroup {
-    fn clone(&self) -> Self {
-        Self {
-            wire: dyn_clone::clone_box(&*self.wire),
-            number_wires: self.number_wires.clone(),
-        }
     }
 }
 
@@ -129,8 +120,8 @@ let wire_b = RoundWire::new(
 
 // Returns OK because the vector of wires was not empty
 assert!(StrandedWire::new(vec![
-    WireGroup::new(Box::new(wire_a), NonZero::new(3).unwrap()),
-    WireGroup::new(Box::new(wire_b), NonZero::new(2).unwrap()),
+    WireGroup::new(Arc::new(wire_a), NonZero::new(3).unwrap()),
+    WireGroup::new(Arc::new(wire_b), NonZero::new(2).unwrap()),
 ]).is_ok());
 ```
  */
@@ -177,8 +168,8 @@ impl StrandedWire {
         ).unwrap();
 
     assert!(StrandedWire::new(vec![
-        WireGroup::new(Box::new(wire_a.clone()), NonZero::new(3).unwrap()),
-        WireGroup::new(Box::new(wire_b), NonZero::new(2).unwrap()),
+        WireGroup::new(Arc::new(wire_a.clone()), NonZero::new(3).unwrap()),
+        WireGroup::new(Arc::new(wire_b), NonZero::new(2).unwrap()),
     ]).is_ok());
 
     // Empty list
@@ -186,8 +177,8 @@ impl StrandedWire {
 
     // Not all wires have the same material
     assert!(StrandedWire::new(vec![
-        WireGroup::new(Box::new(wire_a), NonZero::new(3).unwrap()),
-        WireGroup::new(Box::new(wire_c), NonZero::new(2).unwrap()),
+        WireGroup::new(Arc::new(wire_a), NonZero::new(3).unwrap()),
+        WireGroup::new(Arc::new(wire_c), NonZero::new(2).unwrap()),
     ]).is_err());
     ```
      */

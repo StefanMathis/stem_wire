@@ -23,8 +23,8 @@ fn test_slot_filling_factor() {
     .unwrap();
 
     let strand_list = vec![
-        WireGroup::new(Box::new(wire_1.clone()), 1.try_into().unwrap()),
-        WireGroup::new(Box::new(wire_2.clone()), 2.try_into().unwrap()),
+        WireGroup::new(Arc::new(wire_1.clone()), 1.try_into().unwrap()),
+        WireGroup::new(Arc::new(wire_2.clone()), 2.try_into().unwrap()),
     ];
     let wire_litz = StrandedWire::new(strand_list).unwrap();
 
@@ -55,8 +55,8 @@ fn test_slot_filling_factor() {
     .unwrap();
 
     let strand_list = vec![
-        WireGroup::new(Box::new(wire_1.clone()), 1.try_into().unwrap()),
-        WireGroup::new(Box::new(wire_2.clone()), 2.try_into().unwrap()),
+        WireGroup::new(Arc::new(wire_1.clone()), 1.try_into().unwrap()),
+        WireGroup::new(Arc::new(wire_2.clone()), 2.try_into().unwrap()),
     ];
     let wire_litz = StrandedWire::new(strand_list).unwrap();
 
@@ -115,8 +115,8 @@ fn test_resistance_calculation() {
     approxim::assert_abs_diff_eq!(r2_20.eval(&[]).get::<ohm>(), 0.318309, epsilon = 1e-6);
 
     let strand_list = vec![
-        WireGroup::new(Box::new(wire_1.clone()), 1.try_into().unwrap()),
-        WireGroup::new(Box::new(wire_2.clone()), 2.try_into().unwrap()),
+        WireGroup::new(Arc::new(wire_1.clone()), 1.try_into().unwrap()),
+        WireGroup::new(Arc::new(wire_2.clone()), 2.try_into().unwrap()),
     ];
     let wire_litz = StrandedWire::new(strand_list).unwrap();
 
@@ -136,8 +136,8 @@ fn test_resistance_calculation() {
 
     // Second test, but with other numbers
     let strand_list = vec![
-        WireGroup::new(Box::new(wire_1.clone()), 5.try_into().unwrap()),
-        WireGroup::new(Box::new(wire_2.clone()), 7.try_into().unwrap()),
+        WireGroup::new(Arc::new(wire_1.clone()), 5.try_into().unwrap()),
+        WireGroup::new(Arc::new(wire_2.clone()), 7.try_into().unwrap()),
     ];
     let wire_litz = StrandedWire::new(strand_list).unwrap();
 
@@ -157,10 +157,10 @@ fn test_resistance_calculation() {
 
     // Third test with more wire types
     let strand_list = vec![
-        WireGroup::new(Box::new(wire_1.clone()), 5.try_into().unwrap()),
-        WireGroup::new(Box::new(wire_2.clone()), 7.try_into().unwrap()),
-        WireGroup::new(Box::new(wire_1.clone()), 1.try_into().unwrap()),
-        WireGroup::new(Box::new(wire_2.clone()), 1.try_into().unwrap()),
+        WireGroup::new(Arc::new(wire_1.clone()), 5.try_into().unwrap()),
+        WireGroup::new(Arc::new(wire_2.clone()), 7.try_into().unwrap()),
+        WireGroup::new(Arc::new(wire_1.clone()), 1.try_into().unwrap()),
+        WireGroup::new(Arc::new(wire_2.clone()), 1.try_into().unwrap()),
     ];
     let wire_litz = StrandedWire::new(strand_list).unwrap();
 
@@ -208,8 +208,8 @@ fn test_wire_with_different_materials() {
         .unwrap();
 
         let strand_list = vec![
-            WireGroup::new(Box::new(wire_1.clone()), 1.try_into().unwrap()),
-            WireGroup::new(Box::new(wire_2.clone()), 2.try_into().unwrap()),
+            WireGroup::new(Arc::new(wire_1.clone()), 1.try_into().unwrap()),
+            WireGroup::new(Arc::new(wire_2.clone()), 2.try_into().unwrap()),
         ];
         assert!(StrandedWire::new(strand_list).is_err());
     }
@@ -245,8 +245,8 @@ fn test_wire_with_different_materials() {
         .unwrap();
 
         let strand_list = vec![
-            WireGroup::new(Box::new(wire_1.clone()), 1.try_into().unwrap()),
-            WireGroup::new(Box::new(wire_2.clone()), 2.try_into().unwrap()),
+            WireGroup::new(Arc::new(wire_1.clone()), 1.try_into().unwrap()),
+            WireGroup::new(Arc::new(wire_2.clone()), 2.try_into().unwrap()),
         ];
         assert!(StrandedWire::new(strand_list).is_ok());
     }
@@ -282,8 +282,8 @@ fn test_wire_with_different_materials() {
         .unwrap();
 
         let strand_list = vec![
-            WireGroup::new(Box::new(wire_1.clone()), 1.try_into().unwrap()),
-            WireGroup::new(Box::new(wire_2.clone()), 2.try_into().unwrap()),
+            WireGroup::new(Arc::new(wire_1.clone()), 1.try_into().unwrap()),
+            WireGroup::new(Arc::new(wire_2.clone()), 2.try_into().unwrap()),
         ];
         assert!(StrandedWire::new(strand_list).is_err());
     }
@@ -313,8 +313,8 @@ fn test_wire_with_different_materials() {
         .unwrap();
 
         let strand_list = vec![
-            WireGroup::new(Box::new(wire_1.clone()), 1.try_into().unwrap()),
-            WireGroup::new(Box::new(wire_2.clone()), 2.try_into().unwrap()),
+            WireGroup::new(Arc::new(wire_1.clone()), 1.try_into().unwrap()),
+            WireGroup::new(Arc::new(wire_2.clone()), 2.try_into().unwrap()),
         ];
 
         assert!(StrandedWire::new(strand_list).is_ok());
