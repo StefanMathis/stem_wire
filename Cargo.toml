@@ -11,7 +11,7 @@ repository = "https://github.com/StefanMathis/stem_wire.git"
 
 [dependencies]
 # stem_material = { version = "0.4.0" }
-stem_material = { path = "../stem_material" } 
+stem_material = { version = "0.5.0" } 
 rayon = "1.5"
 serde_mosaic = { version = "0.3", optional = true, features = ["serde_yaml"] }
 deserialize_untagged_verbose_error = { version = "0.1.8", optional = true }
