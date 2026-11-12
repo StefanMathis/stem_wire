@@ -14,6 +14,7 @@ modify the components. -->
 [`resistance`]: https://docs.rs/stem_wire/{{VERSION}}/stem_wire/resistance/
 
 [![Documentation](https://docs.rs/stem_wire/badge.svg)](https://docs.rs/stem_wire)
+[![CI](https://github.com/StefanMathis/stem_wire/actions/workflows/ci.yml/badge.svg)](https://github.com/StefanMathis/stem_wire/actions/workflows/ci.yml)
 
 Wire definition for stem – a Simulation Toolbox for Electric Motors. The
 [stem book](https://stefanmathis.github.io/stem_book/) provides a comprehensive
